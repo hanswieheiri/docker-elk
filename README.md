@@ -67,7 +67,7 @@ By default, the stack exposes the following ports:
 * 5000: Logstash TCP input
 * 9200: Elasticsearch HTTP
 * 9300: Elasticsearch TCP transport
-* 5601: Kibana
+* 80: Kibana
 
 ### SELinux
 
@@ -136,7 +136,7 @@ $ docker-compose restart kibana logstash
 ```
 
 Give Kibana a few seconds to initialize, then access the Kibana web UI by hitting
-[http://localhost:5601](http://localhost:5601) with a web browser and use the following default credentials to login:
+[http://localhost](http://localhost) with a web browser and use the following default credentials to login:
 
 * user: *elastic*
 * password: *\<your generated elastic password>*
@@ -165,7 +165,7 @@ configuration.
 Create an index pattern via the Kibana API:
 
 ```console
-$ curl -XPOST -D- 'http://localhost:5601/api/saved_objects/index-pattern' \
+$ curl -XPOST -D- 'http://localhost/api/saved_objects/index-pattern' \
     -H 'Content-Type: application/json' \
     -H 'kbn-version: 7.0.1' \
     -u elastic:<your generated elastic password> \

@@ -61,14 +61,14 @@ log 'Waiting for Elasticsearch readiness'
 poll_ready elasticsearch 'http://localhost:9200/' 'elastic:changeme'
 
 log 'Waiting for Kibana readiness'
-poll_ready kibana 'http://localhost:5601/api/status' 'kibana:changeme'
+poll_ready kibana 'http://localhost/api/status' 'kibana:changeme'
 
 log 'Waiting for Logstash readiness'
 poll_ready logstash 'http://localhost:9600/_node/pipelines/main?pretty'
 
 log 'Creating Logstash index pattern in Kibana'
 source .env
-curl -X POST -D- 'http://localhost:5601/api/saved_objects/index-pattern' \
+curl -X POST -D- 'http://localhost/api/saved_objects/index-pattern' \
 	-s -w '\n' \
 	-H 'Content-Type: application/json' \
 	-H "kbn-version: ${ELK_VERSION}" \
@@ -76,7 +76,7 @@ curl -X POST -D- 'http://localhost:5601/api/saved_objects/index-pattern' \
 	-d '{"attributes":{"title":"logstash-*","timeFieldName":"@timestamp"}}'
 
 log 'Searching index pattern via Kibana API'
-response="$(curl 'http://localhost:5601/api/saved_objects/_find?type=index-pattern' -u elastic:changeme)"
+response="$(curl 'http://localhost/api/saved_objects/_find?type=index-pattern' -u elastic:changeme)"
 echo "$response"
 count="$(jq -rn --argjson data "${response}" '$data.total')"
 if [[ $count -ne 1 ]]; then
