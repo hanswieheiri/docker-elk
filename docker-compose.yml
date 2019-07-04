@@ -14,7 +14,7 @@ services:
       - "9200:9200"
       - "9300:9300"
     environment:
-      ES_JAVA_OPTS: "-Xmx2g -Xms2g"
+      ES_JAVA_OPTS: "-Xmx1700m -Xms1700m"
       ELASTIC_PASSWORD: $ELASTIC_PASSWORD
     networks:
       - elk
@@ -31,7 +31,7 @@ services:
       - "5000:5000"
       - "9600:9600"
     environment:
-      LS_JAVA_OPTS: "-Xmx1g -Xms1g"
+      LS_JAVA_OPTS: "-Xmx800m -Xms800m"
       ELASTIC_USER: $ELASTIC_USER
       ELASTIC_PASSWORD: $ELASTIC_PASSWORD
     networks:
@@ -48,6 +48,8 @@ services:
       - ./kibana/config/kibana.yml:/usr/share/kibana/config/kibana.yml:ro
     ports:
       - "80:5601"
+    environment:
+      NODE_OPTIONS: '--max-old-space-size=250'
     networks:
       - elk
     depends_on:
