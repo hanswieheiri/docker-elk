@@ -206,6 +206,8 @@ The Logstash configuration is stored in [`logstash/config/logstash.yml`][config-
 It is also possible to map the entire `config` directory instead of a single file, however you must be aware that
 Logstash will be expecting a [`log4j2.properties`][log4j-props] file for its own logging.
 
+Configuration is loaded automatically every 10 seconds. To disable it set `config.reload.automatic` to `false`.
+
 ### How to disable paid features
 
 Switch the value of Elasticsearch's `xpack.license.self_generated.type` option from `trial` to `basic` (see [License
