@@ -15,7 +15,8 @@ services:
       - "9300:9300"
     environment:
       ES_JAVA_OPTS: "-Xmx1700m -Xms1700m"
-      ELASTIC_PASSWORD: $ELASTIC_PASSWORD
+    env_file:
+      - .env
     networks:
       - elk
 
@@ -32,8 +33,8 @@ services:
       - "9600:9600"
     environment:
       LS_JAVA_OPTS: "-Xmx800m -Xms800m"
-      ELASTIC_USER: $ELASTIC_USER
-      ELASTIC_PASSWORD: $ELASTIC_PASSWORD
+    env_file:
+      - .env
     networks:
       - elk
     depends_on:
