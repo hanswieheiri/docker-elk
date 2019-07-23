@@ -17,6 +17,7 @@ services:
       ES_JAVA_OPTS: "-Xmx1700m -Xms1700m"
     env_file:
       - .env
+    restart: always
     networks:
       - elk
 
@@ -35,6 +36,7 @@ services:
       LS_JAVA_OPTS: "-Xmx800m -Xms800m"
     env_file:
       - .env
+    restart: always
     networks:
       - elk
     depends_on:
@@ -51,6 +53,7 @@ services:
       - "80:5601"
     environment:
       NODE_OPTIONS: '--max-old-space-size=250'
+    restart: always
     networks:
       - elk
     depends_on:
